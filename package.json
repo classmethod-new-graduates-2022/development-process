@@ -1,0 +1,43 @@
+{
+  "name": "shinsotsu-training",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "author": "",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@secretlint/secretlint-rule-preset-recommend": "^5.1.1",
+    "@tsconfig/recommended": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "eslint": "^8.11.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.3.7",
+    "prettier": "^2.6.0",
+    "secretlint": "^5.1.1",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2",
+    "vitest": "^0.7.10"
+  },
+  "lint-staged": {
+    "*": [
+      "secretlint"
+    ],
+    "*.{json,yml,yaml}": [
+      "prettier --write"
+    ],
+    "*.{ts}": [
+      "prettier --write",
+      "eslint --cache --fix"
+    ]
+  }
+}

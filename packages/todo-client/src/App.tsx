@@ -1,44 +1,87 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { useEffect, useState, VFC } from 'react'
 
-function App() {
-  const [count, setCount] = useState(0)
+interface Todo {
+  id: string
+  content: string
+}
+
+interface FetchTodosResponseJson {
+  todos: Todo[]
+}
+
+const App: VFC = () => {
+  const [todos, setTodos] = useState<Todo[]>([])
+  const [content, setContent] = useState('')
+
+  const fetchTodos = async () => {
+    const fetchTodosResponse = await fetch('http://localhost:3001/todos', {
+      method: 'GET',
+    })
+    const fetchTodosResponseJson: FetchTodosResponseJson =
+      await fetchTodosResponse.json()
+    setTodos(fetchTodosResponseJson.todos)
+  }
+
+  useEffect(() => {
+    fetchTodos()
+  }, [])
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
+    <>
+      <h1>Todoリスト</h1>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          ;(async () => {
+            await fetch('http://localhost:3001/todos', {
+              method: 'POST',
+              body: JSON.stringify({ content }),
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
+
+            setContent('')
+
+            await fetchTodos()
+          })()
+        }}
+      >
+        <input
+          type="text"
+          name="content"
+          onChange={(e) => setContent(e.target.value)}
+          value={content}
+        />
+        <button type="submit">Todo追加</button>
+      </form>
+
+      <div>
+        {todos.length === 0 && <>Todoがありません</>}
+        {todos.length > 0 && (
+          <ul>
+            {todos.map((todo) => (
+              <li key={todo.id}>
+                {todo.content}
+                <button
+                  onClick={() => {
+                    ;(async () => {
+                      await fetch(`http://localhost:3001/todos/${todo.id}`, {
+                        method: 'DELETE',
+                      })
+
+                      await fetchTodos()
+                    })()
+                  }}
+                >
+                  Todo削除
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   )
 }
 

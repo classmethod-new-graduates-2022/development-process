@@ -1,10 +1,13 @@
 import express from 'express'
+import cors from 'cors'
 import { v4 as uuidV4 } from 'uuid'
 import fs from 'fs'
 
 const app = express()
 
+app.use(cors())
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 interface Todo {
   id: string
@@ -61,4 +64,4 @@ app.delete('/todos/:id', async (req, res) => {
   res.json({ message: 'Success!' })
 })
 
-app.listen(3000)
+app.listen(3001)

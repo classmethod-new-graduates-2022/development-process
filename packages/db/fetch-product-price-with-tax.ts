@@ -43,5 +43,5 @@ export const fetchProductPriceWithTax = async (
     },
   })
   const product = getOutput.Item as Product
-  return product.price * 1.1
+  return Math.ceil(product.price * 1.1) // 切り上げ
 }

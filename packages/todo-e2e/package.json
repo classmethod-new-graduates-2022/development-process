@@ -1,0 +1,11 @@
+{
+  "name": "todo-e2e",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "playwright"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.20.2"
+  }
+}

@@ -1,13 +1,11 @@
 {
   "name": "shinsotsu-training",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
   },
-  "author": "",
   "workspaces": [
     "packages/*"
   ],

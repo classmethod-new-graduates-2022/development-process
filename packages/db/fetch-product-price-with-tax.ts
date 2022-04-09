@@ -1,7 +1,33 @@
 import { DynamoDB } from '@aws-sdk/client-dynamodb'
 import { DynamoDBDocument } from '@aws-sdk/lib-dynamodb'
 
-export const fetchProductPriceWithTax = async (productId: string) => {
+/**
+ * 商品
+ */
+export interface Product {
+  /**
+   * 商品番号
+   * @example '0001'
+   */
+  no: string
+  /**
+   * 商品名
+   * @example 'トイレ消臭剤'
+   */
+  name: string
+  /**
+   * 値段(円)
+   * @example 100
+   */
+  price: number
+}
+
+/**
+ * 商品の値段を消費税(10%)込みで返す
+ */
+export const fetchProductPriceWithTax = async (
+  productNo: string
+): Promise<number> => {
   const ddb = new DynamoDB({
     credentials: {
       accessKeyId: 'DUMMY',
@@ -10,10 +36,12 @@ export const fetchProductPriceWithTax = async (productId: string) => {
   })
   const ddbDoc = DynamoDBDocument.from(ddb)
 
-  ddbDoc.get({
+  const getOutput = await ddbDoc.get({
     TableName: 'products',
     Key: {
-      id: productId,
+      no: productNo,
     },
   })
+  const product = getOutput.Item as Product
+  return product.price * 1.1
 }

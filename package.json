@@ -41,5 +41,8 @@
       "prettier --write",
       "eslint --cache --fix"
     ]
+  },
+  "dependencies": {
+    "undici": "^5.0.0"
   }
 }

@@ -47,7 +47,7 @@ export const fetchProductPriceWithDiscountAndTax = async (
   productNos: string[]
 ): Promise<number> => {
   // キャンペーン情報を取得
-  const { body } = await request('https//campaign.example.com/api')
+  const { body } = await request('https://campaign.example.com/api')
   const campaign: Campaign = await body.json()
 
   const ddb = new DynamoDB({

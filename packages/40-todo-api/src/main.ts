@@ -14,6 +14,10 @@ interface Todo {
   content: string
 }
 
+app.get('', async (_, res) => {
+  res.send('ok')
+})
+
 app.get('/todos', async (_, res) => {
   if (!fs.existsSync('./db.json')) {
     res.json({ todos: [] })
@@ -64,4 +68,6 @@ app.delete('/todos/:id', async (req, res) => {
   res.json({ message: 'Success!' })
 })
 
-app.listen(3001)
+app.listen(3001, () => {
+  console.log('Server is running on http://localhost:3001')
+})

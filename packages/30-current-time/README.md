@@ -1,9 +1,15 @@
 # 日時に依存したコードのテスト
 
-vitest のモック機能や `useFakeTimers()` を使わずに、`greet.ts` の実装は変更して、
-`greet()` のテストコードを書いてみよう。
+`greet.ts` の実装を変更して、vitest のモック機能や `useFakeTimers()` を使わずに、
+`greet()` のテストコードを完成させよう。
 
 上記ができたら、`greet.ts` の実装は変更せずに、モック機能や `useFakeTimers()` を使ったテストコードも書いてみよう。
+
+## テストの実行方法
+
+```console
+npx vitest packages/30-current-time/
+```
 
 ## キーワード
 

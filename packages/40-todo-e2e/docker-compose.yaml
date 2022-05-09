@@ -1,0 +1,17 @@
+version: '3.9' # optional since v1.27.0
+services:
+  api:
+    build: ../..
+    ports:
+      - '3001:3001'
+    volumes:
+      - ../40-todo-api:/app/packages/40-todo-api
+    command: npm run -w packages/40-todo-api/ start
+
+  client:
+    build: ../..
+    ports:
+      - '3000:3000'
+    volumes:
+      - ../40-todo-client:/app/packages/40-todo-client
+    command: npm run -w packages/40-todo-client/ start -- --host

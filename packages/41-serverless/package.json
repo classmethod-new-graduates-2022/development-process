@@ -1,0 +1,33 @@
+{
+  "name": "41-serverless",
+  "version": "0.1.0",
+  "bin": {},
+  "scripts": {
+    "test-s": "vitest small",
+    "test-m": "vitest medium",
+    "test-l": "vitest large"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-lambda": "3.55.0",
+    "@types/jest": "^27.4.1",
+    "@types/node": "10.17.27",
+    "aws-cdk": "2.23.0",
+    "aws-sdk-client-mock": "0.6.2",
+    "esbuild": "0.14.38",
+    "esbuild-register": "3.3.2",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "3.55.0",
+    "@aws-sdk/client-s3": "3.55.0",
+    "@aws-sdk/lib-dynamodb": "3.55.0",
+    "@aws-sdk/signature-v4-crt": "3.55.0",
+    "aws-cdk-lib": "2.23.0",
+    "constructs": "^10.0.0",
+    "source-map-support": "^0.5.21",
+    "zod": "3.15.1"
+  }
+}

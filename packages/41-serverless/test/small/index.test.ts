@@ -21,9 +21,7 @@ test('test', async () => {
   expect(calls[0].args[0].input).toEqual({
     TableName: 'TEST_TABLE_NAME',
     Key: { id: 1 },
-    ExpressionAttributeNames: { '#name': 'name', '#age': 'age' },
+    UpdateExpression: 'SET name=:name, age=:age',
     ExpressionAttributeValues: { ':name': 'test-name', ':age': 18 },
-    UpdateExpression: 'SET #name=:name, #age=:age',
-    ReturnValues: 'ALL_NEW',
   })
 })

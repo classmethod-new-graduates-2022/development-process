@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/first */
 process.env.TABLE_NAME = 'TEST_TABLE_NAME'
 process.env.ENDPOINT = 'http://localhost:4566'
@@ -18,14 +19,7 @@ beforeEach(async () => {
 })
 
 test('test', async () => {
-  const res = await handler({ id: 1, name: 'test-name', age: 18 })
-
-  expect(res).toEqual({ ok: true, data: { id: 1, name: 'test-name', age: 18 } })
-
-  const item = await documentClient.get({
-    TableName: 'TEST_TABLE_NAME',
-    Key: { id: 1 },
-  })
-
-  expect(item).toMatchObject({ Item: { id: 1, name: 'test-name', age: 18 } })
+  // 1. `handler()`関数を呼び出して、
+  // 2. 戻り値を確認して、
+  // 3. DynamoDBの値が期待通り変更されているかを確認しましょう。
 })

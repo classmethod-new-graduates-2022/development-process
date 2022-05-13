@@ -16,19 +16,13 @@ npm run test-s
 準備:
 
 ```bash
-docker compose --file ./test/medium/docker-compose.yml up
+docker run -it --rm -e SERVICES=dynamodb -e INIT_SCRIPTS_PATH=/docker-entrypoint-initaws.d -e DEFAULT_REGION='ap-northeast-1' -p 4566:4566 -v $(pwd)/test/medium/init:/docker-entrypoint-initaws.d localstack/localstack:0.14
 ```
 
 テスト実行:
 
 ```bash
 npm run test-m
-```
-
-後片付け:
-
-```bash
-docker compose --file ./test/medium/docker-compose.yml down
 ```
 
 ### Large Size Test

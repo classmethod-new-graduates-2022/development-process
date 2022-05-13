@@ -1,5 +1,4 @@
-/* eslint-disable import/first */
-process.env.TABLE_NAME = 'TEST_TABLE_NAME'
+/* eslint-disable no-unused-vars */
 
 import { beforeEach, expect, test } from 'vitest'
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
@@ -19,25 +18,7 @@ beforeEach(async () => {
 })
 
 test('test', async () => {
-  const res = await lambdaClient.send(
-    new InvokeCommand({
-      FunctionName: 'shinsotsu-kenshu-function',
-      Payload: Buffer.from(
-        JSON.stringify({ id: 1, name: 'test-name', age: 18 })
-      ),
-    })
-  )
-
-  expect(res).toMatchObject({ Payload: expect.any(Uint8Array) })
-  expect(JSON.parse(Buffer.from(res.Payload!).toString())).toEqual({
-    ok: true,
-    data: { id: 1, name: 'test-name', age: 18 },
-  })
-
-  const item = await documentClient.get({
-    TableName: 'shinsotsu-kenshu-table',
-    Key: { id: 1 },
-  })
-
-  expect(item).toMatchObject({ Item: { id: 1, name: 'test-name', age: 18 } })
+  // 1. lambdaを呼び出して、
+  // 2. レスポンスを確認し、
+  // 3. DynamoDBの値が期待通り変更されているかを確認しましょう。
 })

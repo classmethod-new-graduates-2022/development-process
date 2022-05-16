@@ -7,6 +7,13 @@ services:
     volumes:
       - ../40-todo-api:/app/packages/40-todo-api
     command: npm run -w packages/40-todo-api/ start
+    environment:
+      AWS_ENDPOINT: http://db:4566
+      AWS_REGION: ap-northeast-1
+      AWS_ACCESS_KEY_ID: DUMMY
+      AWS_SECRET_ACCESS_KEY: DUMMY
+    depends_on:
+      - db
 
   client:
     build: ../..
@@ -15,3 +22,14 @@ services:
     volumes:
       - ../40-todo-client:/app/packages/40-todo-client
     command: npm run -w packages/40-todo-client/ start -- --host
+
+  db:
+    image: localstack/localstack:0.14
+    ports:
+      - '4566:4566'
+    volumes:
+      - ./init:/docker-entrypoint-initaws.d
+    environment:
+      SERVICES: dynamodb
+      INIT_SCRIPTS_PATH: /docker-entrypoint-initaws.d
+      DEFAULT_REGION: ap-northeast-1

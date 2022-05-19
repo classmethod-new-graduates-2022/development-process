@@ -8,4 +8,9 @@
  * "Nabe Atsu" => 4
  */
 
-export const countVowel = (/* word: string */) => {}
+const LIST = 'AIUEO'
+
+export const countVowel = (word: string) => word
+    .toUpperCase()
+    .split('')
+    .filter((char) => LIST.includes(char)).length

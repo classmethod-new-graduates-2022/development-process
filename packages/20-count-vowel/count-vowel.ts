@@ -8,4 +8,19 @@
  * "Nabe Atsu" => 4
  */
 
-export const countVowel = (/* word: string */) => {}
+export const countVowel = (word: string): number => {
+  let count: number = 0
+  for (const char of word.toUpperCase()) {
+    switch (char) {
+      case 'A':
+      case 'I':
+      case 'U':
+      case 'E':
+      case 'O':
+        count += 1
+        break
+      default:
+    }
+  }
+  return count
+}

@@ -1,14 +1,20 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable yoda */
-export const greet = (): 'おはようございます' | 'こんにちは' | 'こんばんは' => {
-  const now = new Date()
+type Greet = (name: string) => string
+export type NowFetcher = () => Date
 
-  if (5 <= now.getHours() && now.getHours() < 12) {
-    return 'おはようございます'
+export const buildGreet =
+  (nowFetcher: NowFetcher): Greet =>
+  (name: string) => {
+    const now = nowFetcher()
+
+    if (5 <= now.getHours() && now.getHours() < 12) {
+      return `おはようございます${name}`
+    }
+
+    if (12 <= now.getHours() && now.getHours() < 18) {
+      return `こんにちは${name}`
+    }
+
+    return `こんばんは${name}`
   }
-
-  if (12 <= now.getHours() && now.getHours() < 18) {
-    return 'こんにちは'
-  }
-
-  return 'こんばんは'
-}

@@ -32,8 +32,10 @@ export const handler = async (event: unknown): Promise<Result> => {
   const result = await documentClient.update({
     TableName: TABLE_NAME, // とあるDynamoDBテーブルの
     Key: { id }, // とあるidのItem（RDBで言うところのレコード）について
-    UpdateExpression: 'SET name=:name, age=:age', // nameとageを変更する。
+    UpdateExpression: 'SET #name=:name, age=:age', // nameとageを変更する。
+    ExpressionAttributeNames: { '#name': 'name' },
     ExpressionAttributeValues: { ':name': name, ':age': age }, // nameとageの変更内容はlambda eventとして渡されたものを使う。
+    ReturnValues: 'ALL_NEW',
   })
 
   return { ok: true, data: result.Attributes }
